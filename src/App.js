@@ -5,9 +5,15 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <div className="container">
         <Weather />
-      </header>
+        <footer>
+          This project was coded by Tanaz Nejad and is{" "}
+          <a href="https://github.com/Tanaz2202/my-weather-app.git">
+            open sourced on Github
+          </a>
+        </footer>
+      </div>
     </div>
   );
 }
