@@ -54,18 +54,18 @@
   color: #e96e4f;
   font-size: 18px;
   font-weight: lighter;
-  margin-top: 23px;
+  margin-top: 10px;
   line-height: 1;
   list-style: none;
   position: relative;
-  right: -32px;
+  right: -40px;
 }
 
 .Weather .searchForm {
   border: 1px solid #eaeaea;
   border-radius: 5px;
   box-shadow: 2px 2px 4px;
-  width: 300px;
+  width: 240px;
 }
 .Weather .submitSearch {
   border: 1px solid #f8f9fa;
@@ -84,8 +84,8 @@
   border: 1px solid #f8f9fa;
   color: #e96e4f;
 }
-.LocationButton {
-  padding: 0px;
+.Weather .currentLocation {
+  padding-left: 35px;
 }
 .currentLocationButton {
   border: 1px solid #f8f9fa;
@@ -97,7 +97,7 @@
   font-size: 12px;
   padding: 5px 2px 5px 2px;
   transition: all 200ms ease-in-out;
-  width: 150px;
+  width: 130px;
 }
 .currentLocationButton:hover {
   background: #f8f9fa;

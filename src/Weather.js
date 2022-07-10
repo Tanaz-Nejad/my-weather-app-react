@@ -3,6 +3,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import WeatherInfo from "./WeatherInfo";
 import WeatherForecast from "./WeatherForecast";
+import CurrentLocation from "./CurrentLocation";
 
 import "./Weather.css";
 
@@ -32,7 +33,7 @@ export default function Weather() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const apiKey = "35a3a47f3af9ffa9356d1af360dfa992";
+    const apiKey = "b997fe84749c69aae89663d6761d24ad";
     const unit = "metric";
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
     axios.get(apiUrl).then(displayWeather);
@@ -41,7 +42,7 @@ export default function Weather() {
   let form = (
     <form onSubmit={handleSubmit}>
       <div className="row">
-        <div className="col-8 searchCityForm">
+        <div className="col-6 searchCityForm">
           <input
             type="search"
             className="searchForm"
@@ -50,8 +51,11 @@ export default function Weather() {
             placeholder="Search for City..."
           />
         </div>
-        <div className="col-4">
+        <div className="col-2">
           <input type="submit" className="submitSearch" />
+        </div>
+        <div className="col-2 currentLocation">
+          <CurrentLocation />
         </div>
       </div>
     </form>
