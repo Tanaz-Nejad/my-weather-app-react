@@ -3,7 +3,6 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import WeatherInfo from "./WeatherInfo";
 import WeatherForecast from "./WeatherForecast";
-import CurrentLocation from "./CurrentLocation";
 
 import "./Weather.css";
 
@@ -53,9 +52,6 @@ export default function Weather() {
         </div>
         <div className="col-2">
           <input type="submit" className="submitSearch" />
-        </div>
-        <div className="col-2 currentLocation">
-          <CurrentLocation />
         </div>
       </div>
     </form>
