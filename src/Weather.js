@@ -12,6 +12,7 @@ export default function Weather() {
   const [weather, setWeather] = useState({});
 
   function displayWeather(response) {
+    console.log(response);
     setLoaded(true);
     setWeather({
       coordinates: response.data.coord,
@@ -38,6 +39,17 @@ export default function Weather() {
     axios.get(apiUrl).then(displayWeather);
   }
 
+  function showLocation(position) {
+    let apiKey = "b997fe84749c69aae89663d6761d24ad";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(displayWeather);
+  }
+
+  function getMyLocation(event) {
+    event.preventDefault();
+    navigator.geolocation.getCurrentPosition(showLocation);
+  }
+
   let form = (
     <form onSubmit={handleSubmit}>
       <div className="row">
@@ -52,6 +64,15 @@ export default function Weather() {
         </div>
         <div className="col-2">
           <input type="submit" className="submitSearch" />
+        </div>
+        <div className="col-2 currentLocation">
+          <button
+            type="Current Location"
+            className="currentLocationButton"
+            onClick={getMyLocation}
+          >
+            Current Location
+          </button>{" "}
         </div>
       </div>
     </form>

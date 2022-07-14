@@ -7,13 +7,13 @@ function App() {
     <div className="App">
       <div className="container">
         <Weather />
-        <footer>
-          This project was coded by Tanaz Nejad and is{" "}
-          <a href="https://github.com/Tanaz2202/my-weather-app.git">
-            open sourced on Github
-          </a>
-        </footer>
       </div>
+      <footer>
+        This project was coded by Tanaz Nejad and is{" "}
+        <a href="https://github.com/Tanaz2202/my-weather-app.git">
+          open sourced on Github
+        </a>
+      </footer>
     </div>
   );
 }
