@@ -7,14 +7,12 @@ import WeatherForecast from "./WeatherForecast";
 import "./Weather.css";
 
 export default function Weather() {
-  const [loaded, setLoaded] = useState(false);
   const [city, setCity] = useState("");
-  const [weather, setWeather] = useState({});
+  const [weather, setWeather] = useState({ ready: false });
 
   function displayWeather(response) {
-    console.log(response);
-    setLoaded(true);
     setWeather({
+      ready: true,
       coordinates: response.data.coord,
       temperature: Math.round(response.data.main.temp),
       date: new Date(response.data.dt * 1000),
@@ -26,67 +24,52 @@ export default function Weather() {
     });
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
   function updateCity(event) {
     event.preventDefault();
     setCity(event.target.value);
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  function search() {
     const apiKey = "b997fe84749c69aae89663d6761d24ad";
-    const unit = "metric";
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(displayWeather);
   }
 
-  function showLocation(position) {
-    let apiKey = "b997fe84749c69aae89663d6761d24ad";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(displayWeather);
-  }
-
-  function getMyLocation(event) {
-    event.preventDefault();
-    navigator.geolocation.getCurrentPosition(showLocation);
-  }
-
-  let form = (
-    <form onSubmit={handleSubmit}>
-      <div className="row">
-        <div className="col-6 searchCityForm">
-          <input
-            type="search"
-            className="searchForm"
-            onChange={updateCity}
-            autoFocus="on"
-            placeholder="Search for City..."
-          />
-        </div>
-        <div className="col-2">
-          <input type="submit" className="submitSearch" />
-        </div>
-        <div className="col-2 currentLocation">
-          <button
-            type="Current Location"
-            className="currentLocationButton"
-            onClick={getMyLocation}
-          >
-            Current Location
-          </button>{" "}
-        </div>
-      </div>
-    </form>
-  );
-
-  if (loaded) {
+  if (weather.ready) {
     return (
       <div className="Weather">
-        {form}
+        <form onSubmit={handleSubmit}>
+          <div className="row">
+            <div className="col-6 searchCityForm">
+              <input
+                type="search"
+                className="searchForm"
+                onChange={updateCity}
+                autoFocus="on"
+                placeholder="Search for City..."
+              />
+            </div>
+            <div className="col-2">
+              <input type="submit" className="submitSearch" />
+            </div>
+            <div className="col-2 currentLocation">
+              <button type="Current Location" className="currentLocationButton">
+                Current Location
+              </button>{" "}
+            </div>
+          </div>
+        </form>
         <WeatherInfo data={weather} />
         <WeatherForecast coordinates={weather.coordinates} />
       </div>
     );
   } else {
-    return <div className="Weather">{form}</div>;
+    search();
+    return "loading...";
   }
 }
